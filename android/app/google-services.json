@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "306642620537",
+    "project_id": "movie-listr",
+    "storage_bucket": "movie-listr.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:306642620537:android:abd39dbbf7c08acba104a8",
+        "android_client_info": {
+          "package_name": "com.example.movie_listr"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "306642620537-390v7oc95ttdv7g23sv93jpdn6433jko.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.movie_listr",
+            "certificate_hash": "882dc47d83f99c673bf6c7ed3609004d1343125c"
+          }
+        },
+        {
+          "client_id": "306642620537-ca8p9uh12n9l8cigs5t4crnbauujkuoq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCPbJjnK6huWJqj5WZSEvn7qdvOu4Ad7Uc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "306642620537-ca8p9uh12n9l8cigs5t4crnbauujkuoq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
