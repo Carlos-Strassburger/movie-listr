@@ -64,7 +64,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 height: 24.0,
               ),
               RoundedButton(
-                title: 'Register',
+                title: 'Sign up',
                 color: kGreenColor,
                 onPressed: () async {
                   setState(() {

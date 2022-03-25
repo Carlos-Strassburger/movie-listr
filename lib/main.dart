@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movie_listr/screens/movie_screen.dart';
 import 'constants.dart';
 import 'screens/mainPage_screen.dart';
 import 'screens/welcome_screen.dart';

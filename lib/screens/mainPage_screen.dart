@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:movie_listr/components/movie_poster.dart';
 import 'package:movie_listr/constants.dart';
+import 'package:movie_listr/services/api.dart';
+
+import '../components/appBar.dart';
+import '../models/movie_model.dart';
+import '../services/api.dart';
 
 class MainPageScreen extends StatefulWidget {
   static const String id = 'mainPage_screen';
@@ -9,124 +15,102 @@ class MainPageScreen extends StatefulWidget {
 }
 
 class _MainPageScreenState extends State<MainPageScreen> {
+  Api api = Api();
+  late Future<List<MovieModel>> futureTopRated;
+  late Future<List<MovieModel>> futureDiscover;
+
+  @override
+  void initState() {
+    super.initState();
+    setState(() {
+      futureTopRated = api.getTopRated();
+      futureDiscover = api.getDiscover();
+    });
+  }
+
+  var image_url = 'https://image.tmdb.org/t/p/w500/';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        toolbarHeight: 60,
-        toolbarOpacity: 1,
-        bottomOpacity: 0,
-        backgroundColor: kBackgroundColor,
-        title: Center(
-          child: Text(
-            'MOVIE LISTR',
-            style: kTitleTextStyle.copyWith(color: kGreenColor, fontSize: 35.0),
-          ),
-        ),
-        elevation: 0,
-        leading: IconButton(
-          alignment: Alignment.topLeft,
-          icon: const Icon(
-            Icons.menu,
-            color: kGreenColor,
-          ),
-          splashRadius: 25,
-          iconSize: 40.0,
-          color: kBackgroundColor,
-          onPressed: () {},
-        ),
-        actions: [
-          IconButton(
-            icon: const Icon(
-              Icons.search,
-              color: kGreenColor,
+      appBar: appBar,
+      body: Padding(
+        padding: const EdgeInsets.all(14.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Row(
+              children: [
+                const Text(
+                  'Discover',
+                  style: TextStyle(
+                      color: kGreenColor,
+                      fontSize: 23.0,
+                      fontWeight: FontWeight.w600),
+                ),
+                Spacer(),
+                TextButton(
+                  style: TextButton.styleFrom(
+                    textStyle: const TextStyle(fontSize: 18),
+                  ),
+                  onPressed: () {},
+                  child: const Text('Show all'),
+                )
+              ],
             ),
-            splashRadius: 25,
-            iconSize: 40.0,
-            color: kBackgroundColor,
-            onPressed: () {},
-          ),
-        ],
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            children: <Widget>[
-              const Text(
-                'Recommended',
-                style: const TextStyle(
-                  color: kGreenColor,
-                  fontSize: 22.0,
+            SingleChildScrollView(
+              child: Container(
+                height: 220,
+                child: FutureBuilder<List<MovieModel>>(
+                  future: futureDiscover,
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return MoviePoster(snapshot: snapshot);
+                    } else {
+                      // print('snapshot: $snapshot');
+                      return Center(child: CircularProgressIndicator());
+                    }
+                  },
                 ),
               ),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Column(
-                  children: [
-                    Row(
-                      children: [
-                        kMoviePosterIcon,
-                        kMoviePosterIcon,
-                        kMoviePosterIcon,
-                        kMoviePosterIcon,
-                        kMoviePosterIcon,
-                        kMoviePosterIcon,
-                      ],
-                    ),
-                  ],
+            ),
+            Row(
+              children: [
+                Text(
+                  'Top Rated',
+                  style: TextStyle(
+                    color: kGreenColor,
+                    fontSize: 22.0,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                Spacer(),
+                TextButton(
+                  style: TextButton.styleFrom(
+                    textStyle: const TextStyle(fontSize: 18),
+                  ),
+                  onPressed: () {},
+                  child: const Text('Show all'),
+                ),
+              ],
+            ),
+            SingleChildScrollView(
+              child: Container(
+                height: 220,
+                child: FutureBuilder<List<MovieModel>>(
+                  future: futureTopRated,
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return MoviePoster(snapshot: snapshot);
+                    } else {
+                      // print('snapshot: $snapshot');
+                      return Center(child: CircularProgressIndicator());
+                    }
+                  },
                 ),
               ),
-              const Text(
-                'Trending',
-                style: TextStyle(
-                  color: kGreenColor,
-                  fontSize: 22.0,
-                ),
-              ),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Column(
-                  children: [
-                    Row(
-                      children: [
-                        kMoviePosterIcon,
-                        kMoviePosterIcon,
-                        kMoviePosterIcon,
-                        kMoviePosterIcon,
-                        kMoviePosterIcon,
-                        kMoviePosterIcon,
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-              const Text(
-                'Coming Soon',
-                style: TextStyle(
-                  color: kGreenColor,
-                  fontSize: 22.0,
-                ),
-              ),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Column(
-                  children: [
-                    Row(
-                      children: [
-                        kMoviePosterIcon,
-                        kMoviePosterIcon,
-                        kMoviePosterIcon,
-                        kMoviePosterIcon,
-                        kMoviePosterIcon,
-                        kMoviePosterIcon,
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 
-//0xFFF5DFBB - wheat
-//0xFF111328 - red
-// - green
-
 const kBackgroundColor = Color(0xFF212231);
 const kBackgroundColor2 = Color(0xFF111328);
 const kGreenColor = Color(0xFF1DD3B0);
@@ -40,14 +36,4 @@ const kTitleTextStyle = TextStyle(
   ],
 );
 
-final Widget kMoviePosterIcon = Padding(
-  padding: const EdgeInsets.all(8.0),
-  child: Container(
-    width: 110,
-    height: 160,
-    decoration: const BoxDecoration(
-      color: Colors.white70,
-      borderRadius: BorderRadius.all(Radius.circular(7)),
-    ),
-  ),
-);
+const kImage_url = 'https://image.tmdb.org/t/p/w500/';
